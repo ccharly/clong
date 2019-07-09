@@ -6,6 +6,9 @@ project(clong)
 set(CLONG_ROOT ${CMAKE_SOURCE_DIR})
 set(LLVM_ROOT /usr/local/opt/llvm)
 
+## Enable compile_commands.json
+set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
+
 ## Packages
 ## ----------------------------------------------------------------------------
 
