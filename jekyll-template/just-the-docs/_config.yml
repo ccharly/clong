@@ -1,0 +1,14 @@
+# Setup
+title: Clong
+description: Clong
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+
+# Enable or disable the site search
+search_enabled: true
+
+# Pretty URLs
+permalink: pretty
+
+# Build settings
+theme: just-the-docs
