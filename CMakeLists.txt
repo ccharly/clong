@@ -6,6 +6,24 @@ project(clong)
 set(CLONG_ROOT ${CMAKE_SOURCE_DIR})
 set(LLVM_ROOT /usr/local/opt/llvm)
 
+## Packages
+## ----------------------------------------------------------------------------
+
+## Look for a header-only package
+function(find_third_party_package PREFIX HPP PKG)
+  set(PKG_DIR ${CMAKE_CURRENT_SOURCE_DIR}/third_party/${PKG})
+  find_path(${PREFIX}_INCLUDE_DIR ${HPP} PATHS ${PKG_DIR} ${PKG_DIR}/include)
+  if ((NOT ${PREFIX}_INCLUDE_DIR) OR (NOT EXISTS ${PKG_DIR}))
+      execute_process(COMMAND
+          git submodule update --init -- ${PKG_DIR})
+      set(${PREFIX}_INCLUDE_DIR ${PKG_DIR}
+          CACHE PATH "${PKG} include directory")
+  endif()
+endfunction()
+
+## Packages
+find_third_party_package(FILESYSTEM ghc/filesystem.hpp filesystem)
+
 ## Setup library
 ## ----------------------------------------------------------------------------
 
@@ -15,8 +33,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
 
+
 ## Includes
-include_directories(${CLONG_ROOT}/include ${LLVM_ROOT}/include)
+include_directories(${CLONG_ROOT}/include ${LLVM_ROOT}/include ${FILESYSTEM_INCLUDE_DIR})
 
 ## Sources
 file(GLOB_RECURSE clong.src
