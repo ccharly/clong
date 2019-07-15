@@ -26,6 +26,7 @@ endfunction()
 
 ## Packages
 find_third_party_package(FILESYSTEM ghc/filesystem.hpp filesystem)
+find_third_party_package(FMT fmt/format.h fmt)
 
 ## Setup library
 ## ----------------------------------------------------------------------------
@@ -38,7 +39,12 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
 
 
 ## Includes
-include_directories(${CLONG_ROOT}/include ${LLVM_ROOT}/include ${FILESYSTEM_INCLUDE_DIR})
+include_directories(
+  ${CLONG_ROOT}/include
+  ${LLVM_ROOT}/include
+  ${FILESYSTEM_INCLUDE_DIR}
+  ${FMT_INCLUDE_DIR}
+)
 
 ## Sources
 file(GLOB_RECURSE clong.src
