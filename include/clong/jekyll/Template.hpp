@@ -11,7 +11,7 @@ template <typename JekyllTemplate>
 class Template {
   public:
   static fs::path make_src_path(std::string const& template_dir) {
-    return fs::path("../jekyll-template/").concat(template_dir);
+    return fs::path("../jekyll/").concat(template_dir);
   }
 
   static fs::path make_dst_path(std::string const& dst_dir, std::string const& next_dir = "") {
