@@ -1,12 +1,13 @@
 #include <iostream>
 #include <unordered_set>
 #include <unordered_map>
+#include <clang/AST/ASTContext.h>
+#include <clang/AST/ASTConsumer.h>
 #include <clang/Tooling/CommonOptionsParser.h>
 #include <clang/Tooling/Tooling.h>
 #include <clang/Frontend/CompilerInstance.h>
 #include <llvm/Support/CommandLine.h>
-#include "clong/clong.hpp"
-#include "clong/jekyll.hpp"
+#include <clong/clong.hpp>
 
 // Apply a custom category to all command-line options so that they are the
 // only ones displayed.
@@ -19,61 +20,6 @@ static cl::opt<std::string> OutputDir("O",
 
 
 namespace clong {
-
-class Visitor : public clang::RecursiveASTVisitor<Visitor> {
-
-  clang::CompilerInstance& m_ci;
-  Context& m_ctxt;
-
-  public:
-  Visitor(clang::CompilerInstance& ci, Context& ctxt)
-    : m_ci(ci), m_ctxt(ctxt) {
-  }
-
-  private:
-  public:
-  bool VisitNamespaceDecl(clang::NamespaceDecl* decl) {
-    m_ctxt.register_node(decl);
-    return true;
-  }
-
-  bool VisitCXXRecordDecl(clang::CXXRecordDecl* decl) {
-    m_ctxt.register_node(decl);
-    return true;
-  }
-
-  bool VisitClassTemplateDecl(clang::ClassTemplateDecl* decl) {
-    m_ctxt.register_node(decl);
-    m_ctxt.mark_as_visited(decl->getTemplatedDecl());
-    return true;
-  }
-
-  bool VisitFunctionDecl(clang::FunctionDecl* decl) {
-    m_ctxt.register_function_node(decl);
-    return true;
-  }
-
-  bool VisitFunctionTemplateDecl(clang::FunctionTemplateDecl* decl) {
-    m_ctxt.register_function_node(decl);
-    m_ctxt.mark_as_visited(decl->getTemplatedDecl());
-    return true;
-  }
-
-  bool VisitVarDecl(clang::VarDecl* decl) {
-    m_ctxt.register_node(decl);
-    return true;
-  }
-
-  bool VisitEnumDecl(clang::EnumDecl* decl) {
-    m_ctxt.register_node(decl);
-    return true;
-  }
-
-  bool VisitEnumConstantDecl(clang::EnumConstantDecl* decl) {
-    m_ctxt.register_node(decl);
-    return true;
-  }
-};
 
 class Consumer : public clang::ASTConsumer {
   Visitor m_visitor;
