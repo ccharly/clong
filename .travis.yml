@@ -7,18 +7,16 @@ matrix:
         - os: linux
           env:
             - TOOLSET_CXX=g++-8
-    include:
         - os: linux
           env:
             - TOOLSET_CXX=clang++-6.0
-    include:
         - os: windows
           env:
             - TOOLSET_CXX=cl.exe
-    include:
         - os: osx
           env:
             - TOOLSET_CXX=clang
+
 ## For some reason, default osx image is not working with homebrew
 osx_image: xcode10.2
 
@@ -27,11 +25,14 @@ compiler:
   - clang
   - gcc
 
+## Configure packages sources
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+      - llvm-toolchain-trusty-6.0
+
 ## Install step
-apt:
-  sources:
-    - ubuntu-toolchain-r-test
-    - llvm-toolchain-trusty-6.0
 install:
     - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
         choco install -y llvm;
