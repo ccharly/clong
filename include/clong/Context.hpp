@@ -4,6 +4,7 @@
 #include <clong/config.hpp>
 #include <clong/Node.hpp>
 #include <clong/PrettyPrinter.hpp>
+#include <memory>
 
 namespace clong {
 
