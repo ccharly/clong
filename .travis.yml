@@ -24,7 +24,8 @@ install:
         choco install -y llvm;
       fi
     - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-        sudo apt install llvm-dev;
+        sudo apt update;
+        sudo apt install llvm-dev -y;
       fi
     - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
         brew install llvm;
