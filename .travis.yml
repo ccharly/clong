@@ -1,5 +1,17 @@
 language: c++
 
+## Packages
+addons:
+    homebrew:
+        packages:
+            - llvm
+    apt:
+        packages:
+            - llvm
+    chocolatey:
+        packages:
+            - llvm
+
 ## Platforms
 os:
   - linux
