@@ -15,7 +15,7 @@ matrix:
         #    - TOOLSET_CXX=cl.exe
         - os: osx
           env:
-            - TOOLSET_CXX=clang
+            - TOOLSET_CXX=clang++
 
 ## For some reason, default osx image is not working with homebrew
 osx_image: xcode10.2
