@@ -36,6 +36,13 @@ endif()
 ## Enable compile_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 
+## Logs
+## ----------------------------------------------------------------------------
+message(STATUS "LLVM_ROOT: ${LLVM_ROOT}")
+message(STATUS "CLONG_ROOT: ${CLONG_ROOT}")
+message(STATUS "THIRD_PARTY_DIR: ${THIRD_PARTY_DIR}")
+message(STATUS "BUILD_INSTALL_DIR: ${BUILD_INSTALL_DIR}")
+
 ## Packages
 ## ----------------------------------------------------------------------------
 
