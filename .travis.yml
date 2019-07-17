@@ -1,29 +1,30 @@
 ## It seems that windows does not support `c++`, even though `cpp` works fine
 language: cpp
 
-## Packages
-addons:
-  homebrew:
-    packages:
-    - llvm
-  apt:
-    packages:
-    - llvm
-  choco:
-    packages:
-    - llvm
-
 ## Platforms
 os:
   - linux
   - windows
   - osx
+## For some reason, default osx image is not working with homebrew
 osx_image: xcode10.2
 
 ## Compilers
 compiler:
   - clang
   - gcc
+
+## Install step
+install:
+    - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
+        choco install -y llvm;
+      fi
+    - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+        sudo apt install llvm-dev
+      fi
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+        brew install llvm
+      fi
 
 ## Build
 script:
