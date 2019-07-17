@@ -9,10 +9,29 @@ include(ExternalProject)
 ## Setup project
 ## ----------------------------------------------------------------------------
 project(clong)
+
+## For convenience
 set(CLONG_ROOT ${CMAKE_SOURCE_DIR})
-set(LLVM_ROOT /usr/local/opt/llvm)
+
+## Directory containing third party packages
 set(THIRD_PARTY_DIR ${CLONG_ROOT}/third_party)
+
+## Temporary install dir for compiled third-party packages
 set(BUILD_INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/_install)
+
+## Determine LLVM prefix (root) dir
+if (NOT DEFINED LLVM_ROOT)
+  if (WIN32)
+    ## Assume LLVM has been installed using chocolatey with standard location
+    ## TODO
+  elseif (APPLE)
+    ## Assume LLVM has been installed using homebrew with standard location
+    set(LLVM_ROOT /usr/local/opt/llvm)
+  elseif (UNIX AND NOT APPLE)
+    ## Use llvm-config to query LLVM's root
+    execute_process(COMMAND llvm-config --prefix OUTPUT_VARIABLE LLVM_ROOT)
+  endif()
+endif()
 
 ## Enable compile_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
