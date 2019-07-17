@@ -29,7 +29,9 @@ if (NOT DEFINED LLVM_ROOT)
     set(LLVM_ROOT /usr/local/opt/llvm)
   elseif (UNIX AND NOT APPLE)
     ## Use llvm-config to query LLVM's root
-    execute_process(COMMAND llvm-config --prefix OUTPUT_VARIABLE LLVM_ROOT)
+    execute_process(COMMAND llvm-config --prefix OUTPUT_VARIABLE LLVM_ROOT_RAW)
+    ## Make sure to strip the \n at the end
+    string(REGEX REPLACE "\n$" "" LLVM_ROOT "${LLVM_ROOT_RAW}")
   endif()
 endif()
 
