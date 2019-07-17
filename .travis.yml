@@ -20,11 +20,6 @@ matrix:
 ## For some reason, default osx image is not working with homebrew
 osx_image: xcode10.2
 
-## Compilers
-compiler:
-  - clang
-  - gcc
-
 ## Configure packages sources
 addons:
   apt:
@@ -49,7 +44,7 @@ install:
 script:
   - mkdir build
   - cd build
-  - cmake ..
+  - cmake .. -DCMAKE_CXX_COMPILER=$TOOLSET_CXX
   - cmake --build .
   - cmake --build .
   - cmake --build . --target tests
