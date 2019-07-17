@@ -98,7 +98,7 @@ find_third_party_package(GOOGLETEST lib/libgtest.h googletest -DBUILD_GMOCK=OFF)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti -fvisibility=hidden")
 
 
 ## Includes
@@ -143,6 +143,7 @@ set(LLVM_LIBS
   -lxml2
   -lm
   -lz
+  -lpthread ## Required for linux
 )
 link_directories(
   ${LLVM_ROOT}/lib
