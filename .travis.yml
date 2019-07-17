@@ -10,9 +10,9 @@ matrix:
         - os: linux
           env:
             - TOOLSET_CXX=clang++-6.0
-        - os: windows
-          env:
-            - TOOLSET_CXX=cl.exe
+        #- os: windows
+        #  env:
+        #    - TOOLSET_CXX=cl.exe
         - os: osx
           env:
             - TOOLSET_CXX=clang

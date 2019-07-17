@@ -164,7 +164,7 @@ function(add_test_executable target src)
   ## We don't want test to be part of the main target
   set_target_properties(${target} PROPERTIES EXCLUDE_FROM_ALL TRUE)
   ## Link to gtest
-  target_link_libraries(${target} gtest gtest_main)
+  target_link_libraries(${target} gtest gtest_main pthread)
   ## Add it to the global `tests` target
   add_dependencies(tests ${target})
   ## Run the test when invoking the target
