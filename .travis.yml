@@ -1,22 +1,24 @@
-language: c++
+## It seems that windows does not support `c++`, even though `cpp` works fine
+language: cpp
 
 ## Packages
 addons:
-    homebrew:
-        packages:
-            - llvm
-    apt:
-        packages:
-            - llvm
-    chocolatey:
-        packages:
-            - llvm
+  homebrew:
+    packages:
+    - llvm
+  apt:
+    packages:
+    - llvm
+  choco:
+    packages:
+    - llvm
 
 ## Platforms
 os:
   - linux
   - windows
   - osx
+osx_image: xcode10.2
 
 ## Compilers
 compiler:
