@@ -31,9 +31,10 @@ addons:
 install:
     - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
         export LLVM_TARGET=llvm+clang-8.0.0-win64-msvc-release;
-        export CMAKE_ARGS=-DLLVM_ROOT=$(pwd)/$LLVM_TARGET;
+        export CMAKE_ARGS=-DLLVM_ROOT=$(pwd)/llvm-clang-msvc
         wget -nv "https://ziglang.org/deps/$LLVM_TARGET.tar.xz";
         7z x "$LLVM_TARGET.tar.xz";
+        mv "$LLVM_TARGET" llvm-clang-msvc;
       fi
     - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
         sudo apt update;
