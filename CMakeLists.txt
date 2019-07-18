@@ -22,8 +22,10 @@ set(BUILD_INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/_install)
 ## Determine LLVM prefix (root) dir
 if (NOT DEFINED LLVM_ROOT)
   if (WIN32)
-    ## Assume LLVM has been installed using chocolatey with standard location
-    ## TODO
+    ## For travis
+    if (IS_TRAVIS)
+      set(LLVM_ROOT ${CLONG_ROOT}/llvm-clang-msvc)
+    endif()
   elseif (APPLE)
     ## Assume LLVM has been installed using homebrew with standard location
     set(LLVM_ROOT /usr/local/opt/llvm)
