@@ -10,9 +10,9 @@ matrix:
         - os: linux
           env:
             - TOOLSET_CXX=clang++-6.0
-        #- os: windows
-        #  env:
-        #    - TOOLSET_CXX=cl.exe
+        - os: windows
+          env:
+            - TOOLSET_CXX=cl.exe
         - os: osx
           env:
             - TOOLSET_CXX=clang++
@@ -30,7 +30,13 @@ addons:
 ## Install step
 install:
     - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
-        choco install -y llvm;
+        ## LLVM/Clang pre-built libs
+        export LLVM_TARGET="llvm+clang-8.0.0-win64-msvc-release";
+        ## Tells where to find this install
+        export CMAKE_ARGS="-DLLVM_ROOT=$LLVM_TARGET";
+        ## Now get it and extract it
+        wget "https://ziglang.org/deps/$LLVM_TARGET.tar.xz";
+        tar xzf $LLVM_TARGET.tar.xz;
       fi
     - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
         sudo apt update;
@@ -44,7 +50,7 @@ install:
 script:
   - mkdir build
   - cd build
-  - cmake .. -DCMAKE_CXX_COMPILER=$TOOLSET_CXX
+  - cmake .. -DCMAKE_CXX_COMPILER=$TOOLSET_CXX $CMAKE_ARGS
   - cmake --build .
   - cmake --build .
   - cmake --build . --target tests
