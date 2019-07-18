@@ -33,7 +33,8 @@ install:
         export LLVM_TARGET=llvm+clang-8.0.0-win64-msvc-release;
         wget -nv "https://ziglang.org/deps/$LLVM_TARGET.tar.xz";
         7z x "$LLVM_TARGET.tar.xz";
-        7z x "$LLVM_TARGET.tar" -ollvm-clang-msvc;
+        7z x "$LLVM_TARGET.tar";
+        mv $LLVM_TARGET llvm-clang-msvc;
         ls llvm-clang-msvc;
       fi
     - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
