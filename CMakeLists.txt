@@ -119,33 +119,33 @@ file(GLOB_RECURSE clong.src
 
 ## Link
 set(CLANG_LIBS
-  -lclangTooling
-  -lclangDriver
-  -lclangFrontend
-  -lclangParse
-  -lclangSerialization
-  -lclangSema
-  -lclangAnalysis
-  -lclangEdit
-  -lclangLex
-  -lclangAST
-  -lclangBasic
+  clangTooling
+  clangDriver
+  clangFrontend
+  clangParse
+  clangSerialization
+  clangSema
+  clangAnalysis
+  clangEdit
+  clangLex
+  clangAST
+  clangBasic
 )
 set(LLVM_LIBS
-  -lLLVMOption
-  -lLLVMProfileData
-  -lLLVMMCParser
-  -lLLVMMC
-  -lLLVMBitReader
-  -lLLVMCore
-  -lLLVMBinaryFormat
-  -lLLVMSupport
-  -lLLVMDemangle
-  -lcurses
-  -lxml2
-  -lm
-  -lz
-  -lpthread ## Required for linux
+  LLVMOption
+  LLVMProfileData
+  LLVMMCParser
+  LLVMMC
+  LLVMBitReader
+  LLVMCore
+  LLVMBinaryFormat
+  LLVMSupport
+  LLVMDemangle
+  curses
+  xml2
+  m
+  z
+  pthread ## Required for linux
 )
 link_directories(
   ${LLVM_ROOT}/lib
