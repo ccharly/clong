@@ -47,7 +47,7 @@ install:
 script:
   - mkdir build
   - cd build
-  - cmake .. -DCMAKE_CXX_COMPILER=$TOOLSET_CXX $CMAKE_ARGS
+  - cmake .. -DCMAKE_CXX_COMPILER=$TOOLSET_CXX "$CMAKE_ARGS"
   - cmake --build .
   - cmake --build .
   - cmake --build . --target tests
