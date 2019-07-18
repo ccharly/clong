@@ -33,7 +33,7 @@ install:
         export LLVM_TARGET="llvm+clang-8.0.0-win64-msvc-release";
         export CMAKE_ARGS="-DLLVM_ROOT=$LLVM_TARGET";
         wget "https://ziglang.org/deps/$LLVM_TARGET.tar.xz";
-        tar xzf $LLVM_TARGET.tar.xz;
+        tar xf $LLVM_TARGET.tar.xz;
       fi
     - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
         sudo apt update;
