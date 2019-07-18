@@ -34,6 +34,7 @@ install:
         export CMAKE_ARGS=-DLLVM_ROOT=$(pwd)/llvm-clang-msvc;
         wget -nv "https://ziglang.org/deps/$LLVM_TARGET.tar.xz";
         7z x "$LLVM_TARGET.tar.xz";
+        ls;
         mv "$LLVM_TARGET" llvm-clang-msvc;
       fi
     - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
