@@ -151,28 +151,28 @@ file(GLOB_RECURSE clong.src
 
 ## Link
 set(CLANG_LIBS
-  clangTooling
-  clangDriver
-  clangFrontend
-  clangParse
-  clangSerialization
-  clangSema
-  clangAnalysis
-  clangEdit
-  clangLex
   clangAST
+  clangAnalysis
   clangBasic
+  clangDriver
+  clangEdit
+  clangFrontend
+  clangLex
+  clangParse
+  clangSema
+  clangSerialization
+  clangTooling
 )
 set(LLVM_LIBS
-  LLVMOption
-  LLVMProfileData
-  LLVMMCParser
-  LLVMMC
+  LLVMBinaryFormat
   LLVMBitReader
   LLVMCore
-  LLVMBinaryFormat
-  LLVMSupport
   LLVMDemangle
+  LLVMMC
+  LLVMMCParser
+  LLVMOption
+  LLVMProfileData
+  LLVMSupport
 )
 if (CLONG_IS_MSVC)
   ## Required for those functions: GetFileVersionInfoSize and VerQueryValueW
