@@ -53,7 +53,7 @@ script:
   - cmake .. -DCMAKE_CXX_COMPILER=$TOOLSET_CXX -DIS_TRAVIS=ON $CMAKE_ARGS
   - ls _install/lib
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
-      cp _install/bin/gtest*.dll .
+      cp _install/bin/gtest*.dll .;
     fi
   - cmake --build . $CMAKE_BUILD_ARGS
   - cmake --build . --target tests $CMAKE_BUILD_ARGS
