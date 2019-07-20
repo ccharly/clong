@@ -19,6 +19,15 @@ set(THIRD_PARTY_DIR ${CLONG_ROOT}/third_party)
 ## Temporary install dir for compiled third-party packages
 set(BUILD_INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/_install)
 
+## Detect compilers
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+  set(CLONG_IS_CLANG ON)
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+  set(CLONG_IS_GCC ON)
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+  set(CLONG_IS_MSVC ON)
+endif()
+
 ## Determine LLVM prefix (root) dir
 if (NOT DEFINED LLVM_ROOT)
   if (WIN32)
@@ -147,7 +156,12 @@ set(LLVM_LIBS
   LLVMSupport
   LLVMDemangle
 )
-if (NOT WIN32)
+if (CLONG_IS_MSVC)
+  ## Required for those functions: GetFileVersionInfoSize and VerQueryValueW
+  set(LLVM_DEP_LIBS
+    version
+  )
+else()
   ## Those ones are only available on UNIX
   set(LLVM_DEP_LIBS
     curses
@@ -155,11 +169,6 @@ if (NOT WIN32)
     m
     z
     pthread ## Required for linux
-  )
-else()
-  ## Required for those functions: GetFileVersionInfoSize and VerQueryValueW
-  set(LLVM_DEP_LIBS
-    version
   )
 endif()
 link_directories(
@@ -180,8 +189,12 @@ function(add_test_executable target src)
   add_executable(${target} ${src})
   ## We don't want test to be part of the main target
   set_target_properties(${target} PROPERTIES EXCLUDE_FROM_ALL TRUE)
+  ## Required by gtest
+  if (NOT CLONG_IS_MSVC)
+    set(GTEST_DEP_LIBS pthread)
+  endif()
   ## Link to gtest
-  target_link_libraries(${target} gtest gtest_main pthread)
+  target_link_libraries(${target} gtest gtest_main ${GTEST_DEP_LIBS})
   ## Add it to the global `tests` target
   add_dependencies(tests ${target})
   ## Run the test when invoking the target
