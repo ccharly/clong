@@ -20,6 +20,11 @@ matrix:
 ## For some reason, default osx image is not working with homebrew
 osx_image: xcode10.2
 
+## Try to save time on OSX builds
+cache:
+  directories:
+    - $HOME/Library/Caches/Homebrew
+
 ## Configure packages sources
 addons:
   apt:
@@ -33,7 +38,7 @@ install:
         export CMAKE_ARGS="-A x64 -DCMAKE_BUILD_TYPE=Release";
         export CMAKE_BUILD_ARGS="--config Release";
         export CTEST_ARGS="-C Release";
-        git clone git@github.com:ccharly/clong.llvm-clang-8.0.0-win64-msvc-release-minimal.git llvm-clang-msvc;
+        git clone https://github.com/ccharly/clong.llvm-clang-8.0.0-win64-msvc-release-minimal.git llvm-clang-msvc;
       fi
     - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
         sudo apt update;
