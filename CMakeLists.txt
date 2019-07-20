@@ -123,7 +123,10 @@ if (CLONG_IS_CLANG OR CLONG_IS_GCC)
 endif()
 ## Always use /MT (static) instead of /MD (dynamic)
 if (CLONG_IS_MSVC)
-  string(REPLACE "/MD" "/MT" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+  ## Make sure to apply to all CXX flags kind
+  foreach (FLAGS_KIND "" _DEBUG _RELEASE)
+    string(REPLACE "/MD" "/MT" CMAKE_CXX_FLAGS${FLAGS_KIND} "${CMAKE_CXX_FLAGS${FLAGS_KIND}}")
+  endforeach()
 endif()
 
 ## Includes
