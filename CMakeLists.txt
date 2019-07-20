@@ -73,7 +73,7 @@ function(find_third_party_header_only_package PREFIX HPP PKG)
 endfunction()
 
 ## Look for a package, build it and install it locally
-function(find_third_party_package PREFIX DEP PKG OPTS)
+function(find_third_party_package PREFIX DEP PKG)
   message(STATUS "Looking for package: ${PKG}")
   set(PKG_DIR ${THIRD_PARTY_DIR}/${PKG})
   set(PKG_BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/_third_party/${PKG})
@@ -89,7 +89,7 @@ function(find_third_party_package PREFIX DEP PKG OPTS)
     ## Tell where to install and make install messages silent
     execute_process(COMMAND
       ${CMAKE_COMMAND} ${PKG_DIR}
-        ${OPTS}
+        ${ARGN}
         -DCMAKE_INSTALL_PREFIX=${BUILD_INSTALL_DIR}
         -DCMAKE_INSTALL_MESSAGE=NEVER
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
