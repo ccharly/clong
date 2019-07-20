@@ -118,8 +118,12 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 ## Seems that those flags are required for GNU-like compilers
-if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+if (CLONG_IS_CLANG OR CLONG_IS_GCC)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti -fvisibility=hidden")
+endif()
+## Always use /MT (static) instead of /MD (dynamic)
+if (CLONG_IS_MSVC)
+  string(REPLACE "/MD" "/MT" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 endif()
 
 ## Includes
