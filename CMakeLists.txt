@@ -141,12 +141,17 @@ set(LLVM_LIBS
   LLVMBinaryFormat
   LLVMSupport
   LLVMDemangle
-  curses
-  xml2
-  m
-  z
-  pthread ## Required for linux
 )
+## Those ones are only available on UNIX
+if (NOT WIN32)
+  set(LLVM_DEP_LIBS
+    curses
+    xml2
+    m
+    z
+    pthread ## Required for linux
+  )
+endif()
 link_directories(
   ${LLVM_ROOT}/lib
   ${BUILD_INSTALL_DIR}/lib
@@ -154,7 +159,7 @@ link_directories(
 
 ## Bin
 add_executable(clong ${clong.src})
-target_link_libraries(clong ${CLANG_LIBS} ${LLVM_LIBS})
+target_link_libraries(clong ${CLANG_LIBS} ${LLVM_LIBS} ${LLVM_DEP_LIBS})
 
 ## Tests
 ## ----------------------------------------------------------------------------
