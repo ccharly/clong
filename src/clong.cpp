@@ -1,7 +1,7 @@
 #include <iostream>
 #include <unordered_set>
 #include <unordered_map>
-#include <clong/clang.pp>
+#include <clong/clang.hpp>
 #include <clong/clong.hpp>
 
 // Apply a custom category to all command-line options so that they are the
