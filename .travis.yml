@@ -30,6 +30,8 @@ addons:
 ## Install step
 install:
     - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
+        export CMAKE_ARGS="-A x64 -DCMAKE_BUILD_TYPE=Release";
+        export CMAKE_BUILD_ARGS="--config Release"
         export LLVM_TARGET=llvm+clang-8.0.0-win64-msvc-release;
         wget -nv "https://ziglang.org/deps/$LLVM_TARGET.tar.xz";
         7z x "$LLVM_TARGET.tar.xz";
@@ -49,7 +51,7 @@ install:
 script:
   - mkdir build
   - cd build
-  - cmake .. -DCMAKE_CXX_COMPILER=$TOOLSET_CXX -DIS_TRAVIS=ON -A x64
-  - cmake --build . --config Release
-  - cmake --build . --config Release --target tests $CMAKE_BUILD_ARGS
+  - cmake .. -DCMAKE_CXX_COMPILER=$TOOLSET_CXX -DIS_TRAVIS=ON $CMAKE_ARGS
+  - cmake --build . $CMAKE_BUILD_ARGS
+  - cmake --build . --target tests $CMAKE_BUILD_ARGS
   - ctest .
