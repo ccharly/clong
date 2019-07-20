@@ -6,7 +6,7 @@
 // Make sure to disable warnings with MSVC locally
 #if CLONG_IS_MSVC
 #pragma warning(push)
-#pragma warning(disable : 4141 4244 4267) 
+#pragma warning(disable : 4141 4146 4244 4267 4291)
 #endif
 
 #include <clang/AST/ASTContext.h>

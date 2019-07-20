@@ -79,10 +79,13 @@ function(find_third_party_package PREFIX DEP PKG OPTS)
         ${OPTS}
         -DCMAKE_INSTALL_PREFIX=${BUILD_INSTALL_DIR}
         -DCMAKE_INSTALL_MESSAGE=NEVER
+        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
       WORKING_DIRECTORY ${PKG_BUILD_DIR})
     ## Build and install
-    execute_process(COMMAND ${CMAKE_COMMAND} --build ${PKG_BUILD_DIR})
-    execute_process(COMMAND ${CMAKE_COMMAND} --build ${PKG_BUILD_DIR} --target install)
+    execute_process(COMMAND
+      ${CMAKE_COMMAND} --build ${PKG_BUILD_DIR} --config ${CMAKE_BUILD_TYPE})
+    execute_process(COMMAND
+      ${CMAKE_COMMAND} --build ${PKG_BUILD_DIR} --config ${CMAKE_BUILD_TYPE} --target install)
     set(${PREFIX}_FOUND TRUE
       CACHE PATH "${PKG} installed")
   endif()

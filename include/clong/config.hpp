@@ -11,6 +11,6 @@
 #define CLONG_IS_CLANG defined(__clang__)
 //
 /// True if compiling using GCC
-#define CLONG_IS_CLANG defined(__GNUC__) || defined(__GNUG__)
+#define CLONG_IS_GCC defined(__GNUC__) || defined(__GNUG__)
 
 #endif
