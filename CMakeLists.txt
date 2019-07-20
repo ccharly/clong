@@ -82,6 +82,10 @@ function(find_third_party_package PREFIX DEP PKG OPTS)
     ## Init submodule and prepare for build
     execute_process(COMMAND git submodule update --init -- ${PKG_DIR})
     execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${PKG_BUILD_DIR})
+    ## Forward platform on Windows (might wanna use something more specialized here than _IS_MSVC..)
+    if (CLONG_IS_MSVC)
+      set(CMAKE_ARGS -A ${CMAKE_GENERATOR_PLATFORM})
+    endif()
     ## Tell where to install and make install messages silent
     execute_process(COMMAND
       ${CMAKE_COMMAND} ${PKG_DIR}
@@ -89,6 +93,7 @@ function(find_third_party_package PREFIX DEP PKG OPTS)
         -DCMAKE_INSTALL_PREFIX=${BUILD_INSTALL_DIR}
         -DCMAKE_INSTALL_MESSAGE=NEVER
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+        ${CMAKE_ARGS}
       WORKING_DIRECTORY ${PKG_BUILD_DIR})
     ## Build and install
     execute_process(COMMAND
