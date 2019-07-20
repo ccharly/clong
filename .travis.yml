@@ -52,6 +52,7 @@ script:
   - mkdir build
   - cd build
   - cmake .. -DCMAKE_CXX_COMPILER=$TOOLSET_CXX -DIS_TRAVIS=ON $CMAKE_ARGS
+  - ls _install/lib
   - cmake --build . $CMAKE_BUILD_ARGS
   - cmake --build . --target tests $CMAKE_BUILD_ARGS
   - ctest .
