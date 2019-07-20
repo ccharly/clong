@@ -142,14 +142,19 @@ set(LLVM_LIBS
   LLVMSupport
   LLVMDemangle
 )
-## Those ones are only available on UNIX
 if (NOT WIN32)
+  ## Those ones are only available on UNIX
   set(LLVM_DEP_LIBS
     curses
     xml2
     m
     z
     pthread ## Required for linux
+  )
+else()
+  ## Required for those functions: GetFileVersionInfoSize and VerQueryValueW
+  set(LLVM_DEP_LIBS
+    version
   )
 endif()
 link_directories(
