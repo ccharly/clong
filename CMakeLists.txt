@@ -108,7 +108,8 @@ endfunction()
 ## Packages
 find_third_party_header_only_package(FILESYSTEM ghc/filesystem.hpp filesystem)
 find_third_party_header_only_package(FMT fmt/format.h fmt)
-find_third_party_package(GOOGLETEST lib/libgtest.h googletest -DBUILD_GMOCK=OFF)
+find_third_party_package(GOOGLETEST lib/libgtest.h googletest
+  -DBUILD_GMOCK=OFF -DBUILD_SHARED_LIBS=ON)
 
 ## Setup library
 ## ----------------------------------------------------------------------------
@@ -125,7 +126,7 @@ endif()
 if (CLONG_IS_MSVC)
   ## Make sure to apply to all CXX flags kind
   foreach (FLAGS_KIND "" _DEBUG _RELEASE)
-    string(REPLACE "/MD" "/MT" CMAKE_CXX_FLAGS${FLAGS_KIND} "${CMAKE_CXX_FLAGS${FLAGS_KIND}}")
+    #string(REPLACE "/MD" "/MT" CMAKE_CXX_FLAGS${FLAGS_KIND} "${CMAKE_CXX_FLAGS${FLAGS_KIND}}")
   endforeach()
 endif()
 
