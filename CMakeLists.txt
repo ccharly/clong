@@ -105,11 +105,16 @@ function(find_third_party_package PREFIX DEP PKG)
   endif()
 endfunction()
 
+## CI cases
+if (IS_TRAVIS AND CLONG_IS_MSVC)
+  ## Use .dll for MSVC as we're using LLVM dynamically linked version!
+  set(GTEST_CMAKE_ARGS -DBUILD_SHARED_LIBS=ON)
+endif()
+
 ## Packages
 find_third_party_header_only_package(FILESYSTEM ghc/filesystem.hpp filesystem)
 find_third_party_header_only_package(FMT fmt/format.h fmt)
-find_third_party_package(GOOGLETEST lib/libgtest.h googletest
-  -DBUILD_GMOCK=OFF -DBUILD_SHARED_LIBS=ON)
+find_third_party_package(GTEST lib/libgtest.h googletest -DBUILD_GMOCK=OFF ${GTEST_CMAKE_ARGS})
 
 ## Setup library
 ## ----------------------------------------------------------------------------

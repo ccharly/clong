@@ -37,7 +37,6 @@ install:
         7z x "$LLVM_TARGET.tar.xz";
         7z x "$LLVM_TARGET.tar";
         mv $LLVM_TARGET llvm-clang-msvc;
-        ls llvm-clang-msvc;
       fi
     - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
         sudo apt update;
@@ -53,6 +52,7 @@ script:
   - cd build
   - cmake .. -DCMAKE_CXX_COMPILER=$TOOLSET_CXX -DIS_TRAVIS=ON $CMAKE_ARGS
   - ls _install/lib
+  - find _install/ -name "*.dll"
   - cmake --build . $CMAKE_BUILD_ARGS
   - cmake --build . --target tests $CMAKE_BUILD_ARGS
   - ctest .
