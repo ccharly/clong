@@ -2,8 +2,7 @@
 #define CLONG_PRETTYPRINTER_HPP
 
 #include <clong/config.hpp>
-#include <clang/AST/Comment.h>
-#include <clang/AST/PrettyPrinter.h>
+#include <clong/clang.hpp>
 
 namespace clong {
 

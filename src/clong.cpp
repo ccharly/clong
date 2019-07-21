@@ -1,12 +1,7 @@
 #include <iostream>
 #include <unordered_set>
 #include <unordered_map>
-#include <clang/AST/ASTContext.h>
-#include <clang/AST/ASTConsumer.h>
-#include <clang/Tooling/CommonOptionsParser.h>
-#include <clang/Tooling/Tooling.h>
-#include <clang/Frontend/CompilerInstance.h>
-#include <llvm/Support/CommandLine.h>
+#include <clong/clang.hpp>
 #include <clong/clong.hpp>
 
 // Apply a custom category to all command-line options so that they are the

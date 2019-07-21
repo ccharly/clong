@@ -2,10 +2,10 @@
 #define CLONG_VISITOR_HPP
 
 #include <clong/config.hpp>
+#include <clong/clang.hpp>
 #include <clong/Node.hpp>
 #include <clong/PrettyPrinter.hpp>
 #include <clong/Context.hpp>
-#include <clang/AST/RecursiveASTVisitor.h>
 
 namespace clong {
 
