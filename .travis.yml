@@ -20,11 +20,6 @@ matrix:
 ## For some reason, default osx image is not working with homebrew
 osx_image: xcode10.2
 
-## Try to save time on OSX builds
-cache:
-  directories:
-    - $HOME/Library/Caches/Homebrew
-
 ## Configure packages sources
 addons:
   apt:
