@@ -4,22 +4,24 @@
 #include <clong/config.hpp>
 #include <clong/Node.hpp>
 #include <clong/PrettyPrinter.hpp>
+#include <unordered_set>
+#include <unordered_map>
 #include <memory>
 
 namespace clong {
 
 /// Represents a documentation parsed context (with all parsed nodes)
 class Context {
-  Node m_root;
+  RootNode m_root;
   std::unordered_map<const clang::Decl*, std::unique_ptr<Node>> m_decl2node;
   std::unordered_set<const clang::Decl*> m_visited;
   std::unordered_set<const Node*> m_functions;
 
   public:
-  const Node& root() const { return m_root; }
-  std::unordered_set<const Node*>& functions() { return m_functions; }
+  const RootNode& root() const { return m_root; }
   const std::unordered_set<const Node*>& functions() const { return m_functions; }
 
+  public:
   clang::comments::FullComment* comments_of(const clang::Decl* decl) const {
     // Extract comment node from decl
     return decl->getASTContext().getLocalCommentForDeclUncached(decl);
@@ -95,6 +97,10 @@ class Context {
     if (node) {
       set.insert(node);
     }
+  }
+
+  void register_function_node(const clang::Decl* decl) {
+    register_node(decl, m_functions);
   }
 };
 

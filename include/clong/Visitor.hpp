@@ -39,12 +39,12 @@ class Visitor : public clang::RecursiveASTVisitor<Visitor> {
   }
 
   bool VisitFunctionDecl(clang::FunctionDecl* decl) {
-    m_ctxt.register_node(decl, m_ctxt.functions());
+    m_ctxt.register_function_node(decl);
     return true;
   }
 
   bool VisitFunctionTemplateDecl(clang::FunctionTemplateDecl* decl) {
-    m_ctxt.register_node(decl, m_ctxt.functions());
+    m_ctxt.register_function_node(decl);
     m_ctxt.mark_as_visited(decl->getTemplatedDecl());
     return true;
   }

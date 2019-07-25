@@ -18,18 +18,15 @@ class PrettyPrinter {
 
   public:
   static std::string pprint(const clang::Decl* decl, clang::LangOptions const& lo) {
+    assert(decl && "`decl` cannot be null");
     clang::PrintingPolicy pp(lo);
     // Skip body pprinting (function + class bodies)
     pp.TerseOutput = true;
     // Create steam and buffer
     std::string s;
     llvm::raw_string_ostream ss(s);
-    // Use policy to skip bodies
-    if (decl) {
-      decl->print(ss, pp);
-    } else {
-      s = "(null-decl)";
-    }
+    // Extract pretty representation of the decl
+    decl->print(ss, pp);
     // Force flush of stream
     s = ss.str();
     // Post-process pprinted buffer
@@ -57,6 +54,14 @@ class PrettyPrinter {
       }
     }
     return e;
+  }
+
+  static std::string pprint(const RootNode* node) {
+    std::string p;
+    for (auto const* child : node->children) {
+      p += pprint(child);
+    }
+    return p;
   }
 
   static std::string pprint(const Node* node, int level = 0) {

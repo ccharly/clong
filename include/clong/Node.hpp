@@ -2,6 +2,7 @@
 #define CLONG_NODE_HPP
 
 #include <clong/config.hpp>
+#include <clong/clang.hpp>
 
 namespace clong {
 
@@ -11,6 +12,10 @@ struct Node {
   std::string comment;
   const clang::Decl* decl;
   std::vector<Node*> children;
+};
+
+/// The root node of an AST
+struct RootNode : Node {
 };
 
 }

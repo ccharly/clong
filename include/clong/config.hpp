@@ -1,6 +1,9 @@
 #ifndef CLONG_CONFIG_HPP
 #define CLONG_CONFIG_HPP
 
+// For assert
+#include <cassert>
+
 /// Current version
 #define CLONG_VERSION "0.0.0"
 
