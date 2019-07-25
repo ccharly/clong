@@ -20,7 +20,7 @@ set(THIRD_PARTY_DIR ${CLONG_ROOT}/third_party)
 set(BUILD_INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/_install)
 
 ## Detect compilers
-if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang")
   set(CLONG_IS_CLANG ON)
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   set(CLONG_IS_GCC ON)
@@ -125,14 +125,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 ## Seems that those flags are required for GNU-like compilers
 if (CLONG_IS_CLANG OR CLONG_IS_GCC)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti -fvisibility=hidden")
-endif()
-## Always use /MT (static) instead of /MD (dynamic)
-if (CLONG_IS_MSVC)
-  ## Make sure to apply to all CXX flags kind
-  foreach (FLAGS_KIND "" _DEBUG _RELEASE)
-    #string(REPLACE "/MD" "/MT" CMAKE_CXX_FLAGS${FLAGS_KIND} "${CMAKE_CXX_FLAGS${FLAGS_KIND}}")
-  endforeach()
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti")
 endif()
 
 ## Includes
@@ -197,6 +190,11 @@ link_directories(
 ## Bin
 add_executable(clong ${clong.src})
 target_link_libraries(clong ${CLANG_LIBS} ${LLVM_LIBS} ${LLVM_DEP_LIBS})
+
+## Log compilation flags
+message(STATUS "CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
+message(STATUS "CMAKE_CXX_FLAGS_DEBUG: ${CMAKE_CXX_FLAGS_DEBUG}")
+message(STATUS "CMAKE_CXX_FLAGS_RELEASE: ${CMAKE_CXX_FLAGS_RELEASE}")
 
 ## Tests
 ## ----------------------------------------------------------------------------
