@@ -21,11 +21,11 @@ set(BUILD_INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/_install)
 
 ## Detect compilers
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang")
-  set(CLONG_IS_CLANG ON)
+  set(IS_CLANG ON)
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-  set(CLONG_IS_GCC ON)
+  set(IS_GCC ON)
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
-  set(CLONG_IS_MSVC ON)
+  set(IS_MSVC ON)
 endif()
 
 ## Determine LLVM prefix (root) dir
@@ -83,7 +83,7 @@ function(find_third_party_package PREFIX DEP PKG)
     execute_process(COMMAND git submodule update --init -- ${PKG_DIR})
     execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${PKG_BUILD_DIR})
     ## Forward platform on Windows (might wanna use something more specialized here than _IS_MSVC..)
-    if (CLONG_IS_MSVC)
+    if (IS_MSVC)
       set(CMAKE_ARGS -A ${CMAKE_GENERATOR_PLATFORM})
     endif()
     ## Tell where to install and make install messages silent
@@ -106,7 +106,7 @@ function(find_third_party_package PREFIX DEP PKG)
 endfunction()
 
 ## CI cases
-if (IS_TRAVIS AND CLONG_IS_MSVC)
+if (IS_TRAVIS AND IS_MSVC)
   ## Use .dll for MSVC as we're using LLVM dynamically linked version!
   set(GTEST_CMAKE_ARGS -DBUILD_SHARED_LIBS=ON)
 endif()
@@ -124,7 +124,7 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 ## Seems that those flags are required for GNU-like compilers
-if (CLONG_IS_CLANG OR CLONG_IS_GCC)
+if (IS_CLANG OR IS_GCC)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti")
 endif()
 
@@ -167,7 +167,7 @@ set(LLVM_LIBS
   LLVMSupport
   LLVMDemangle
 )
-if (CLONG_IS_MSVC)
+if (IS_MSVC)
   ## Required for those functions: GetFileVersionInfoSize and VerQueryValueW
   set(LLVM_DEP_LIBS
     version
@@ -206,7 +206,7 @@ function(add_test_executable target src)
   ## We don't want test to be part of the main target
   set_target_properties(${target} PROPERTIES EXCLUDE_FROM_ALL TRUE)
   ## Required by gtest
-  if (NOT CLONG_IS_MSVC)
+  if (NOT IS_MSVC)
     set(GTEST_DEP_LIBS pthread)
   endif()
   ## Link to gtest
