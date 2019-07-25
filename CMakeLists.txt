@@ -138,9 +138,8 @@ include_directories(
 )
 
 ## Sources
-file(GLOB_RECURSE clong.src
-  ${CLONG_ROOT}/src/*.cpp
-)
+set(clong.src ${CLONG_ROOT}/src/clong.cpp)
+set(clong_test.src ${CLONG_ROOT}/tests/lib/clong_test.cpp)
 
 ## Link
 set(CLANG_LIBS
@@ -210,17 +209,22 @@ function(add_test_executable target src)
     set(GTEST_DEP_LIBS pthread)
   endif()
   ## Link to gtest
-  target_link_libraries(${target} gtest gtest_main ${GTEST_DEP_LIBS})
+  target_link_libraries(${target} clong_test gtest gtest_main ${GTEST_DEP_LIBS})
   ## Add it to the global `tests` target
   add_dependencies(tests ${target})
   ## Run the test when invoking the target
   add_test(NAME ${target} COMMAND $<TARGET_FILE:${target}>)
 endfunction()
 
+## Test lib
+add_library(clong_test SHARED ${clong_test.src})
+set_target_properties(clong_test PROPERTIES EXCLUDE_FROM_ALL TRUE)
+target_link_libraries(clong_test ${CLANG_LIBS} ${LLVM_LIBS} ${LLVM_DEP_LIBS})
 ## Global test target
 add_custom_target(tests)
 ## All tests
 add_test_executable(tests.empty tests/empty.cpp)
+add_test_executable(tests.multiline tests/multiline.cpp)
 
 ## Install
 ## ----------------------------------------------------------------------------
