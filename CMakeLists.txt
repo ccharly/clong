@@ -114,6 +114,7 @@ endif()
 ## Packages
 find_third_party_header_only_package(FILESYSTEM ghc/filesystem.hpp filesystem)
 find_third_party_header_only_package(FMT fmt/format.h fmt)
+find_third_party_header_only_package(SPDLOG spdlog/spdlog.h spdlog)
 find_third_party_package(GTEST lib/libgtest.h googletest -DBUILD_GMOCK=OFF ${GTEST_CMAKE_ARGS})
 
 ## Setup library
@@ -134,6 +135,7 @@ include_directories(
   ${LLVM_ROOT}/include
   ${FILESYSTEM_INCLUDE_DIR}
   ${FMT_INCLUDE_DIR}
+  ${SPDLOG_INCLUDE_DIR}
   ${BUILD_INSTALL_DIR}/include
 )
 
