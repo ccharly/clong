@@ -3,6 +3,7 @@
 
 #define FMT_HEADER_ONLY
 #include <fmt/format.h>
+#include <fmt/color.h>
 #undef  FMT_HEADER_ONLY
 
 namespace clong {

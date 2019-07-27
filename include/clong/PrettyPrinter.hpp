@@ -3,6 +3,7 @@
 
 #include <clong/config.hpp>
 #include <clong/clang.hpp>
+#include <clong/Node.hpp>
 
 namespace clong {
 

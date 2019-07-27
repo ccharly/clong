@@ -40,6 +40,7 @@ class Context {
   }
 
   void mark_as_visited(const clang::Decl* decl) {
+    CLONG_LOG(debug, log::colored(decl));
     m_visited.insert(decl);
   }
 

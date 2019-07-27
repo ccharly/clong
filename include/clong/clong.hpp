@@ -3,6 +3,7 @@
 
 #include <clong/config.hpp>
 #include <clong/format.hpp>
+#include <clong/log.hpp>
 #include <clong/Context.hpp>
 #include <clong/Visitor.hpp>
 #include <clong/jekyll/JustTheDocs.hpp>

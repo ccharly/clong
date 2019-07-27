@@ -23,4 +23,14 @@
 #pragma warning(pop)
 #endif
 
+namespace clong {
+
+std::string ident(const clang::Decl* decl) {
+  auto* named_decl = clang::dyn_cast<clang::NamedDecl>(decl);
+  assert(named_decl && "Unable to cast current decl to named-decl");
+  return named_decl->getNameAsString();
+}
+
+}
+
 #endif

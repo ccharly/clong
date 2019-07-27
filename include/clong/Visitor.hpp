@@ -20,46 +20,53 @@ class Visitor : public clang::RecursiveASTVisitor<Visitor> {
     : m_ci(ci), m_ctxt(ctxt) {
   }
 
-  private:
   public:
   bool VisitNamespaceDecl(clang::NamespaceDecl* decl) {
+    CLONG_LOG(debug, log::colored(decl));
     m_ctxt.register_node(decl);
     return true;
   }
 
   bool VisitCXXRecordDecl(clang::CXXRecordDecl* decl) {
+    CLONG_LOG(debug, log::colored(decl));
     m_ctxt.register_node(decl);
     return true;
   }
 
   bool VisitClassTemplateDecl(clang::ClassTemplateDecl* decl) {
+    CLONG_LOG(debug, log::colored(decl));
     m_ctxt.register_node(decl);
     m_ctxt.mark_as_visited(decl->getTemplatedDecl());
     return true;
   }
 
   bool VisitFunctionDecl(clang::FunctionDecl* decl) {
+    CLONG_LOG(debug, log::colored(decl));
     m_ctxt.register_function_node(decl);
     return true;
   }
 
   bool VisitFunctionTemplateDecl(clang::FunctionTemplateDecl* decl) {
+    CLONG_LOG(debug, log::colored(decl));
     m_ctxt.register_function_node(decl);
     m_ctxt.mark_as_visited(decl->getTemplatedDecl());
     return true;
   }
 
   bool VisitVarDecl(clang::VarDecl* decl) {
+    CLONG_LOG(debug, log::colored(decl));
     m_ctxt.register_node(decl);
     return true;
   }
 
   bool VisitEnumDecl(clang::EnumDecl* decl) {
+    CLONG_LOG(debug, log::colored(decl));
     m_ctxt.register_node(decl);
     return true;
   }
 
   bool VisitEnumConstantDecl(clang::EnumConstantDecl* decl) {
+    CLONG_LOG(debug, log::colored(decl));
     m_ctxt.register_node(decl);
     return true;
   }

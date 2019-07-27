@@ -25,6 +25,8 @@ std::string test_read_file(std::string const& path) {
 
 // No templates here as we want to link against the test library
 void test(std::vector<std::string> const& args, std::function<void (clong::Context&)> on_end) {
+  // Set log level to debug
+  clong::log::set_level(clong::log::level::debug);
   // Holds "fake" argv arguments
   std::vector<const char*> argv(args.size());
   // Use string pointers for the "fake" argv
