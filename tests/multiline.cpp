@@ -1,4 +1,3 @@
-#include <gtest/gtest.h>
 #include "lib/clong_test.hpp"
 
 TEST(Test, Multiline) {

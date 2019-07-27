@@ -227,6 +227,7 @@ add_custom_target(tests)
 ## All tests
 add_test_executable(tests.empty tests/empty.cpp)
 add_test_executable(tests.multiline tests/multiline.cpp)
+add_test_executable(tests.auto_register_parent tests/auto_register_parent.cpp)
 
 ## Install
 ## ----------------------------------------------------------------------------
