@@ -1,9 +1,10 @@
 #ifndef CLONG_TEST_HPP
 #define CLONG_TEST_HPP
 
+#include <clong/clong.hpp>
+#include <gtest/gtest.h>
 #include <iostream>
 #include <vector>
-#include <clong/clong.hpp>
 
 // Only for testing purposes
 namespace clong {
