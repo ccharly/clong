@@ -11,7 +11,7 @@ namespace clong {
 
 // From: https://stackoverflow.com/questions/2602013/read-whole-ascii-file-into-c-stdstring
 // Read a file entirely (might be used for future tests)
-std::string test_read_file(std::string const& path) {
+CLONG_DLLEXPORT std::string test_read_file(std::string const& path) {
   std::string content;
   std::ifstream t(path);
 
@@ -24,7 +24,7 @@ std::string test_read_file(std::string const& path) {
 }
 
 // No templates here as we want to link against the test library
-void test(std::vector<std::string> const& args, std::function<void (clong::Context&)> on_end) {
+CLONG_DLLEXPORT void test(std::vector<std::string> const& args, std::function<void (clong::Context&)> on_end) {
   // Set log level to debug
   clong::log::set_level(clong::log::level::debug);
   // Holds "fake" argv arguments

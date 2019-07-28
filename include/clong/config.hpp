@@ -12,8 +12,17 @@
 
 /// True if compiling using Clang
 #define CLONG_IS_CLANG defined(__clang__)
-//
+
 /// True if compiling using GCC
 #define CLONG_IS_GCC defined(__GNUC__) || defined(__GNUG__)
+
+/// Required to export symbols
+#ifdef CLONG_IS_MSVC
+  #define CLONG_DLLEXPORT __declspec(dllexport)
+  #define CLONG_DLLIMPORT __declspec(dllimport)
+#else
+  #define CLONG_DLLEXPORT
+  #define CLONG_DLLIMPORT
+#endif
 
 #endif
