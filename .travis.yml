@@ -31,8 +31,8 @@ install:
         git clone https://github.com/ccharly/clong.llvm-clang-8.0.0-win64-msvc-release-minimal.git llvm-clang-msvc;
       fi
     - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-        sudo apt-add-repository ppa:ubuntu-toolchain-r/test;
-        sudo apt-add-repository "deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-8.0 main"
+        sudo apt-add-repository -y ppa:ubuntu-toolchain-r/test;
+        sudo apt-add-repository -y "deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-8.0 main"
         sudo apt update;
         sudo apt autoremove;
         sudo apt install llvm-dev libclang-dev g++-8 clang-8.0 -y;
