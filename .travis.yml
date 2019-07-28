@@ -33,7 +33,6 @@ install:
     - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
         sudo wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -;
         sudo apt-add-repository -y "ppa:ubuntu-toolchain-r/test";
-        sudo apt-add-repository -y "deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-8 main"
         sudo apt update;
         sudo apt autoremove;
         sudo apt install llvm-dev libclang-dev g++-8 clang-8.0 -y;
