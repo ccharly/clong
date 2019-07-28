@@ -24,7 +24,7 @@ osx_image: xcode10.2
 addons:
   apt:
     sources:
-      - llvm-toolchain-xenial-8.0
+      - llvm-toolchain-trusty-8.0
       - ubuntu-toolchain-r-test
 
 ## Install step
