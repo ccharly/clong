@@ -52,4 +52,4 @@ script:
     fi
   - cmake --build . $CMAKE_BUILD_ARGS
   - cmake --build . --target tests $CMAKE_BUILD_ARGS
-  - ctest . $CTEST_ARGS
+  - ctest -VV . $CTEST_ARGS
