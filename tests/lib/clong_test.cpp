@@ -38,7 +38,7 @@ CLONG_DLLEXPORT void test(std::vector<std::string> const& args, std::function<vo
   // Make run silent (otherwise Clang will output some warnings about compilation database...)
   argv.push_back("--");
   // Now we can run `clong`
-  clong::run(argv.size(), argv.data(), on_end);
+  clong::run(static_cast<int>(argv.size()), argv.data(), on_end);
 }
 
 }
