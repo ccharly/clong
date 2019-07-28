@@ -17,7 +17,7 @@
 #define CLONG_IS_GCC defined(__GNUC__) || defined(__GNUG__)
 
 /// Required to export symbols
-#ifdef CLONG_IS_MSVC
+#if CLONG_IS_MSVC
   #define CLONG_DLLEXPORT __declspec(dllexport)
   #define CLONG_DLLIMPORT __declspec(dllimport)
 #else
