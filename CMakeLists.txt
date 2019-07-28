@@ -187,6 +187,12 @@ link_directories(
   ${LLVM_ROOT}/lib
   ${BUILD_INSTALL_DIR}/lib
 )
+## On Windows, .dll are located under the bin/ dir, so add it as LIBPATH:
+if (IS_MSVC)
+link_directories(
+  ${BUILD_INSTALL_DIR}/bin
+)
+endif()
 
 ## Bin
 add_executable(clong ${clong.src})

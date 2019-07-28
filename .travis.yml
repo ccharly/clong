@@ -32,9 +32,7 @@ install:
       fi
     - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
         sudo wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -;
-        echo "LLVM";
         sudo apt-add-repository -y "deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-6.0 main";
-        echo "Ubuntu";
         sudo apt-add-repository -y "ppa:ubuntu-toolchain-r/test";
         sudo apt update;
         sudo apt autoremove;
@@ -53,8 +51,6 @@ script:
       cp _install/bin/gtest*.dll .;
     fi
   - cmake --build . $CMAKE_BUILD_ARGS
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
-      cp Release/*.dll Release/*.lib .;
-    fi
   - cmake --build . --target tests $CMAKE_BUILD_ARGS
+  - ls Release
   - ctest . $CTEST_ARGS
