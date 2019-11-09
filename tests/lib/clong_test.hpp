@@ -37,8 +37,8 @@ class test_temp_file {
   }
 };
 
-std::string test_read_file(std::string const& path);
-void test(std::vector<std::string> const& args, std::function<void (clong::Context&)> on_end);
+CLONG_DLLIMPORT std::string test_read_file(std::string const& path);
+CLONG_DLLIMPORT void test(std::vector<std::string> const& args, std::function<void (clong::Context&)> on_end);
 
 }
 
